@@ -23,9 +23,13 @@ $(function(){
                     $(".uf").val("...");
                     //Consulta o webservice viacep.com.br/
                     $.getJSON("//viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+                        console.log(dados);
                         if (!("erro" in dados)) {
 
                             //Atualiza os campos com os valores da consulta.
+                            $(".logradouro").val(dados.logradouro);
+                            $(".complemento").val(dados.complemento);
+                            $(".bairro").val(dados.bairro);
                             $(".cidade").val(dados.localidade);
                             $(".uf").val(dados.uf);
                             $(".ibge").val(dados.ibge);

@@ -1,35 +1,3 @@
-<?php
-    require 'PHPExcel/vendor/autoload.php';
-
-    $fileName = "xls/MunicipiosBrasil.xls";
-    $excelReader = PHPExcel_IOFactory::createReaderForFile($fileName);
-
-    $excelReader->setLoadAllSheets();
-    $excelObj = $excelReader->load($fileName);
-    $excelObj->getActiveSheet()->toArray(null, true,true,true);
-     
-    $worksheetNames = $excelObj->getSheetNames($fileName);
-    $return = array();
-    foreach($worksheetNames as $key => $sheetName){  
-    //define a aba ativa
-    $excelObj->setActiveSheetIndexByName($sheetName);
-    //cria um array com o nome da aba como índice
-    $return[$sheetName] = $excelObj->getActiveSheet()->toArray(null, true,true,true);
-    }
-    foreach ($return['Sheet1'] as $key => $value) {
-        $latitude = $value['B'];
-        $longitude = $value['C'];
-        $MunUF = $value['D'];
-        $municipio = $value['E'];
-        $uf = $value['F'];
-        $valor = $value['G'];
-
-        if ($municipio == 'GANDU') {
-            var_dump($value);
-        }
-        
-    }
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,6 +19,12 @@
                 </div>
                 <div class="panel-body">
                     <form>
+                        <label>Logradouro</label>
+                        <input type="text" name="logradouro" class="form-control logradouro">
+                        <label>Complemento</label>
+                        <input type="text" name="complemento" class="form-control complemento">
+                        <label>Bairro</label>
+                        <input type="text" name="bairro" class="form-control bairro">
                         <label>Cidade</label>
                         <input type="text" name="cidade" class="form-control cidade">
                         <label>UF</label>
